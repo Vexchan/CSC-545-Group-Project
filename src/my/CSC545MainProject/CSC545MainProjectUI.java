@@ -6,11 +6,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
 
 public class CSC545MainProjectUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form CSC545MainProjectUI
+     * Creates new form CSC545MainProjectUI.
      */
     public CSC545MainProjectUI() {
         initComponents();
@@ -666,12 +667,30 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
 
-    public static void main(String[] args) {
+    public void displayRecipes() {
         List<String> recipes = getRecipes();
-        for(String recipe : recipes) {
-            System.out.println(recipe);
+        DefaultListModel<String> model = new DefaultListModel<>();
+        for (String recipe : recipes) {
+            model.addElement(recipe);
         }
+        jList1.setModel(model);
     }
+    
+    public static void main(String[] args) {
+        // Create an instance of CSC545MainProjectUI
+        CSC545MainProjectUI ui = new CSC545MainProjectUI();
+
+        // Call displayRecipes() on the instance
+        ui.displayRecipes();
+
+        /* Make sure that the JFrame is visible */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                ui.setVisible(true);
+            }
+        });
+    }
+
 
     public static List<String> getRecipes() {
         List<String> recipes = new ArrayList<>();
@@ -684,7 +703,7 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             
             // Get a connection to the database
-            con = DriverManager.getConnection("jdbc:oracle:thin:@myhost:1521:orcl", "PickettL545", "MyPa$$6411");
+            con = DriverManager.getConnection("jdbc:oracle:thin:@csitoracle.eku.edu:1521/cscpdb", "PickettL545", "Pa$$6411");
             
             // Create a Statement object
             stmt = con.createStatement();
