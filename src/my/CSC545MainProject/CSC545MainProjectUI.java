@@ -9,6 +9,9 @@ import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import java.sql.PreparedStatement;
+import java.sql.Types;
+import java.sql.CallableStatement;
 
 public class CSC545MainProjectUI extends javax.swing.JFrame {
 
@@ -107,24 +110,30 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
 
         jLabel25.setText("Fats:");
 
-        jTextField4.setText("jTextField4");
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
             }
         });
 
-        jTextField5.setText("jTextField5");
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
 
-        jTextField6.setText("jTextField6");
-
-        jTextField7.setText("jTextField7");
-
-        jTextField8.setText("jTextField7");
-
-        jTextField9.setText("jTextField7");
+        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField9ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Add New Food To Fridge");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -134,34 +143,43 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel22)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel22))
+                                .addGap(53, 53, 53)
+                                .addComponent(jLabel25)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel25)))
+                                    .addComponent(jLabel21)
+                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jLabel24)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jTextField6)
+                                .addGap(53, 53, 53))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jTextField8)
+                                .addGap(53, 53, 53)))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel24))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel23)
-                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap())
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel21)
-                        .addGap(32, 32, 32))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap())))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
@@ -186,8 +204,8 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel24)
                     .addComponent(jLabel23))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -196,7 +214,7 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
                     .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(204, 255, 255));
@@ -218,6 +236,11 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
         jLabel10.setText("Category:");
 
         jButton2.setText("Add New Recipe");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Appetizer", "Entree", "Dessert", "Soup", "Salad", "Baked Goods", "Main Dishes-Beef", "Main Dishes - Pork", "Main Dishes - Fish", "Main Dishes - Chicken", "Main Dishes - Pasta" }));
 
@@ -287,6 +310,11 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        jList2.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList2ValueChanged(evt);
+            }
         });
         jScrollPane5.setViewportView(jList2);
 
@@ -526,6 +554,11 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         jTextArea1.setColumns(20);
@@ -616,7 +649,7 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addComponent(jLabel26)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -672,33 +705,22 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
         RecipeSearch recipeSearch = new RecipeSearch();
 
         // Get the selected category and entered ingredients
-        String category = (String) jComboBox1.getSelectedItem();
-        String ingredientsInput = jTextField1.getText();
+        String category = ((String) jComboBox1.getSelectedItem()).toLowerCase();
+        String ingredientsInput = jTextField1.getText().toLowerCase();
 
         // Split the input string and directly store it in an array
         String[] ingredientsArray = ingredientsInput.split(",");
 
         // Search recipes by category and ingredients
-        List<String> recipesByCategory = recipeSearch.searchRecipesByCategory(category);
-        List<String> recipesByIngredients = recipeSearch.searchRecipesByIngredients(Arrays.asList(ingredientsArray));
+        List<String> recipes = recipeSearch.searchRecipes(category, Arrays.asList(ingredientsArray));
 
         // If any recipes were found, display them in a pop-up dialog
-        if (!recipesByCategory.isEmpty() || !recipesByIngredients.isEmpty()) {
+        if (!recipes.isEmpty()) {
             StringBuilder sb = new StringBuilder();
             sb.append("Recipes found:\n");
 
-            if (!recipesByCategory.isEmpty()) {
-                sb.append("By category:\n");
-                for (String recipe : recipesByCategory) {
-                    sb.append(recipe).append("\n");
-                }
-            }
-
-            if (!recipesByIngredients.isEmpty()) {
-                sb.append("By ingredients:\n");
-                for (String recipe : recipesByIngredients) {
-                    sb.append(recipe).append("\n");
-                }
+            for (String recipe : recipes) {
+                sb.append(recipe).append("\n");
             }
 
             JOptionPane.showMessageDialog(null, sb.toString());
@@ -708,7 +730,10 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        String selectedFoodName = jList2.getSelectedValue();
+        removeFromFridge(selectedFoodName);
+        // Refresh the list of food items in the fridge
+        populateFridgeList();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
@@ -723,49 +748,332 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+           if (!evt.getValueIsAdjusting() && jList1.getSelectedIndex() != -1) {
+                String selectedRecipe = jList1.getSelectedValue();
+                // Assuming getInstructions and getIngredients are methods that
+                // query the database and return the instructions and ingredients
+                // for the specified recipe
+                String instructions = getInstructions(selectedRecipe);
+                String ingredients = getIngredients(selectedRecipe);
 
-    
-    public static void main(String[] args) {
-        // Create an instance of CSC545MainProjectUI
-        CSC545MainProjectUI ui = new CSC545MainProjectUI();
-
-        /* Make sure that the JFrame is visible */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ui.setVisible(true);
+                jTextArea1.setText(instructions);
+                jTextArea3.setText(ingredients);
             }
-        });
+    }//GEN-LAST:event_jList1ValueChanged
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // Fetching values from the text fields and combo box
+        String recipeName = jTextField2.getText().trim();
+        String ingredients = jTextField3.getText().trim();
+        String category = jComboBox3.getSelectedItem().toString();
+        String instructions = jTextArea2.getText().trim();
+
+        if (recipeName.isEmpty() || ingredients.isEmpty() || category.isEmpty() || instructions.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill out all fields.");
+            return;
+        }
+
+        // Connect to the database
+        try (Connection con = DriverManager.getConnection("jdbc:oracle:thin:@csitoracle.eku.edu:1521/cscpdb", "PickettL545", "Pa$$6411")) {
+            // Insert into Recipe Table
+            String sqlInsertRecipe = "INSERT INTO recipe (name, instructions, category) VALUES (?, ?, ?)";
+            PreparedStatement stmt = con.prepareStatement(sqlInsertRecipe);
+            stmt.setString(1, recipeName);
+            stmt.setString(2, instructions);
+            stmt.setString(3, category);
+            stmt.executeUpdate();
+
+            // Then execute a SELECT statement to get the last inserted ID
+            String sqlSelectLastID = "SELECT MAX(recipe_ID) FROM recipe";
+            stmt = con.prepareStatement(sqlSelectLastID);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                int recipeId = rs.getInt(1);
+
+                // Split the ingredients by comma
+                String[] ingredientNames = ingredients.split(",");
+                for (String ingredientName : ingredientNames) {
+                    // Check if the ingredient exists in Food Table
+                    String sqlSelectFood = "SELECT food_ID FROM food WHERE name = ?";
+                    stmt = con.prepareStatement(sqlSelectFood);
+                    stmt.setString(1, ingredientName.trim());
+                    rs = stmt.executeQuery();
+                    if (rs.next()) {
+                        int foodId = rs.getInt("food_ID");
+                        // Insert into Recipe Ingredients Table
+                        String sqlInsertIngredient = "INSERT INTO recipe_ingredients (recipe_ID, food_ID) VALUES (?, ?)";
+                        stmt = con.prepareStatement(sqlInsertIngredient);
+                        stmt.setInt(1, recipeId);
+                        stmt.setInt(2, foodId);
+                        stmt.executeUpdate();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Ingredient " + ingredientName.trim() + " not found in database.");
+                        return;
+                    }
+                }
+                JOptionPane.showMessageDialog(this, "Recipe added successfully!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to add recipe.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "An error occurred while connecting to the database.");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // Fetching values from the text fields
+        String name = jTextField4.getText().trim();
+
+        // Initialize variables
+        int calories = 0;
+        int carbs = 0;
+        int fats = 0;
+        int protein = 0;
+        int sodium = 0;
+
+        try {
+            // Try to parse the input fields to integers
+            calories = Integer.parseInt(jTextField5.getText().trim());
+            carbs = Integer.parseInt(jTextField6.getText().trim());
+            fats = Integer.parseInt(jTextField7.getText().trim());
+            protein = Integer.parseInt(jTextField8.getText().trim());
+            sodium = Integer.parseInt(jTextField9.getText().trim());
+        } catch (NumberFormatException e) {
+            // Show an error message if the inputs are not valid integers
+            JOptionPane.showMessageDialog(this, "Please enter valid numbers for calories, carbs, fats, protein, and sodium.");
+            return; // Return to stop execution of the method
+        }
+
+        // Check if name field is empty
+        if (name.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill out all fields.");
+            return;
+        }
+
+                // Connect to the database
+        try (Connection con = DriverManager.getConnection("jdbc:oracle:thin:@csitoracle.eku.edu:1521/cscpdb", "PickettL545", "Pa$$6411")) {
+            // Insert into Food Table
+            String sqlInsertFood = "INSERT INTO food (name, calories, carbs, fat, protein, sodium) VALUES (?, ?, ?, ?, ?, ?)";
+            String returnCols[] = { "food_ID" }; // specifying the column that gets the auto-generated value
+            PreparedStatement stmt = con.prepareStatement(sqlInsertFood, returnCols);
+            stmt.setString(1, name);
+            stmt.setInt(2, calories);
+            stmt.setInt(3, carbs);
+            stmt.setInt(4, fats);
+            stmt.setInt(5, protein);
+            stmt.setInt(6, sodium);
+            stmt.executeUpdate();
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+            int newFoodId = 0;
+            if (generatedKeys.next()) {
+                newFoodId = generatedKeys.getInt(1);
+            }
+
+            // Add the new food item to the fridge with a quantity of 1 (or whatever quantity you wish)
+            String sqlInsertFridge = "INSERT INTO fridge (user_ID, food_ID, quantity) VALUES (?, ?, ?)";
+            PreparedStatement pstmt = con.prepareStatement(sqlInsertFridge);
+            pstmt.setInt(1, 1); // Assuming user_ID is 1
+            pstmt.setInt(2, newFoodId);
+            pstmt.setInt(3, 1); // set initial quantity as 1
+            pstmt.executeUpdate();
+
+            JOptionPane.showMessageDialog(this, "Food added successfully to the fridge!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "An error occurred while connecting to the database: " + e);
+        }
+        populateFridgeList();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jList2ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList2ValueChanged
+        String selectedFoodName = jList2.getSelectedValue();
+        updateFoodLabels(selectedFoodName);
+    }//GEN-LAST:event_jList2ValueChanged
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField9ActionPerformed
+    
+    public void removeFromFridge(String foodName) {
+        try (Connection con = DriverManager.getConnection("jdbc:oracle:thin:@csitoracle.eku.edu:1521/cscpdb", "PickettL545", "Pa$$6411")) {
+            // First, get the food_ID of the selected food item
+            String sqlSelectFood = "SELECT food_ID FROM food WHERE name = ?";
+            PreparedStatement stmt = con.prepareStatement(sqlSelectFood);
+            stmt.setString(1, foodName);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int foodId = rs.getInt("food_ID");
+
+                // Then, delete the food item from the fridge
+                String sqlDeleteFridgeItem = "DELETE FROM fridge WHERE user_ID = ? AND food_ID = ?";
+                stmt = con.prepareStatement(sqlDeleteFridgeItem);
+                // Assuming the user_ID is stored in a variable called currentUserId
+                stmt.setInt(1, 1);
+                stmt.setInt(2, foodId);
+
+                stmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "An error occurred while connecting to the database.");
+        }
+    }
+    public void populateFridgeList() {
+        try (Connection con = DriverManager.getConnection("jdbc:oracle:thin:@csitoracle.eku.edu:1521/cscpdb", "PickettL545", "Pa$$6411")) {
+            String sqlSelectFridgeItems = "SELECT food.name FROM fridge INNER JOIN food ON fridge.food_ID = food.food_ID WHERE fridge.user_ID = ?";
+
+            PreparedStatement stmt = con.prepareStatement(sqlSelectFridgeItems);
+            // Assuming the user_ID is stored in a variable called currentUserId
+            stmt.setInt(1, 1);
+
+            ResultSet rs = stmt.executeQuery();
+
+            DefaultListModel listModel = new DefaultListModel();
+            while (rs.next()) {
+                listModel.addElement(rs.getString("name"));
+            }
+
+            jList2.setModel(listModel);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "An error occurred while connecting to the database.");
+        }
     }
 
+    
+    public void updateFoodLabels(String foodName) {
+        try (Connection con = DriverManager.getConnection("jdbc:oracle:thin:@csitoracle.eku.edu:1521/cscpdb", "PickettL545", "Pa$$6411")) {
+            String sqlSelectFridgeItem = "SELECT fridge.quantity, food.calories, food.protein, food.carbs, food.fat, food.sodium FROM fridge INNER JOIN food ON fridge.food_ID = food.food_ID WHERE fridge.user_ID = ? AND food.name = ?";
 
-    public static List<String> getRecipes() {
+            PreparedStatement stmt = con.prepareStatement(sqlSelectFridgeItem);
+            // Assuming the user_ID is stored in a variable called currentUserId
+            stmt.setInt(1, 1);
+            stmt.setString(2, foodName);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                jLabel13.setText(String.valueOf(rs.getInt("quantity")));
+                label1.setText(rs.getInt("calories") + " Cal");
+                label2.setText(rs.getInt("protein") + " g");
+                label3.setText(rs.getInt("carbs") + " g");
+                label5.setText(rs.getInt("fat") + " g");
+                label4.setText(rs.getInt("sodium") + " mg");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "An error occurred while connecting to the database.");
+        }
+    }
+    
+    public String getInstructions(String recipeName) {
+        String instructions = "";
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            con = DriverManager.getConnection("jdbc:oracle:thin:@csitoracle.eku.edu:1521/cscpdb", "PickettL545", "Pa$$6411");
+
+            // Prepare the query
+            String query = "SELECT instructions FROM recipe WHERE name = ?";
+            pstmt = con.prepareStatement(query);
+
+            // Set the parameter
+            pstmt.setString(1, recipeName);
+
+            // Execute the query
+            rs = pstmt.executeQuery();
+
+            // Process the result set
+            if (rs.next()) {
+                instructions = rs.getString("instructions");
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Close the resources
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return instructions;
+    }
+
+    public String getIngredients(String recipeName) {
+        StringBuilder ingredients = new StringBuilder();
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            con = DriverManager.getConnection("jdbc:oracle:thin:@csitoracle.eku.edu:1521/cscpdb", "PickettL545", "Pa$$6411");
+
+            // Prepare the query
+            String query = "SELECT f.name FROM Food f " +
+                           "JOIN Recipe_Ingredients ri ON f.food_ID = ri.food_ID " +
+                           "JOIN Recipe r ON ri.recipe_ID = r.recipe_ID " +
+                           "WHERE r.name = ?";
+            pstmt = con.prepareStatement(query);
+
+            // Set the parameter
+            pstmt.setString(1, recipeName);
+
+            // Execute the query
+            rs = pstmt.executeQuery();
+
+            // Process the result set
+            while (rs.next()) {
+                ingredients.append(rs.getString("name")).append("\n");
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Close the resources
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return ingredients.toString();
+    }
+
+    
+    public void getRecipes() {
         List<String> recipes = new ArrayList<>();
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
-        
+
         try {
-            // Load the driver (assuming you're using Oracle Database)
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            
-            // Get a connection to the database
             con = DriverManager.getConnection("jdbc:oracle:thin:@csitoracle.eku.edu:1521/cscpdb", "PickettL545", "Pa$$6411");
-            
-            // Create a Statement object
             stmt = con.createStatement();
-            
-            // Execute the query
             rs = stmt.executeQuery("SELECT name FROM recipe");
-            
-            // Process the result set
-            while(rs.next()) {
+
+            while (rs.next()) {
                 String recipe = rs.getString("name");
                 recipes.add(recipe);
             }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         } finally {
-            // Close the resources
             try {
                 if (rs != null) rs.close();
                 if (stmt != null) stmt.close();
@@ -774,8 +1082,29 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         }
-        return recipes;
+
+        // Update the jList1 with the fetched recipes
+        DefaultListModel<String> model = new DefaultListModel<>();
+        for (String recipe : recipes) {
+            model.addElement(recipe);
+        }
+        jList1.setModel(model);
     }
+
+    
+    public static void main(String[] args) {
+        // Create an instance of CSC545MainProjectUI
+        CSC545MainProjectUI ui = new CSC545MainProjectUI();
+        ui.getRecipes();
+        ui.populateFridgeList();
+        /* Make sure that the JFrame is visible */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                ui.setVisible(true);
+            }
+        });
+    }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -846,4 +1175,7 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
     private java.awt.Label label4;
     private java.awt.Label label5;
     // End of variables declaration//GEN-END:variables
+
+       
 }
+
