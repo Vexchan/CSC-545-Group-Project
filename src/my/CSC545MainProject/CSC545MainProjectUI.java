@@ -5,8 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 public class CSC545MainProjectUI extends javax.swing.JFrame {
 
@@ -250,7 +252,7 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addComponent(jLabel10)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -457,10 +459,20 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
         jLabel5.setText("Search Based On Ingredients:");
 
         jTextField1.setText("jTextField1");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Search Based On Recipe Category:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Appetizer", "Entree", "Dessert", "Soup", "Salad", "Baked Goods", "Main Dishes-Beef", "Main Dishes - Pork", "Main Dishes - Fish", "Main Dishes - Chicken", "Main Dishes - Pasta" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Appetizer", "Entree", "Dessert", "Soup", "Salad", "Baked Goods", "Main Dishes-Beef", "Main Dishes - Pork", "Main Dishes - Fish", "Main Dishes - Chicken", "Main Dishes - Pasta" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Search");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -654,9 +666,45 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        RecipeSearch recipeSearch = new RecipeSearch();
+
+        // Get the selected category and entered ingredients
+        String category = (String) jComboBox1.getSelectedItem();
+        String ingredientsInput = jTextField1.getText();
+
+        // Split the input string and directly store it in an array
+        String[] ingredientsArray = ingredientsInput.split(",");
+
+        // Search recipes by category and ingredients
+        List<String> recipesByCategory = recipeSearch.searchRecipesByCategory(category);
+        List<String> recipesByIngredients = recipeSearch.searchRecipesByIngredients(Arrays.asList(ingredientsArray));
+
+        // If any recipes were found, display them in a pop-up dialog
+        if (!recipesByCategory.isEmpty() || !recipesByIngredients.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Recipes found:\n");
+
+            if (!recipesByCategory.isEmpty()) {
+                sb.append("By category:\n");
+                for (String recipe : recipesByCategory) {
+                    sb.append(recipe).append("\n");
+                }
+            }
+
+            if (!recipesByIngredients.isEmpty()) {
+                sb.append("By ingredients:\n");
+                for (String recipe : recipesByIngredients) {
+                    sb.append(recipe).append("\n");
+                }
+            }
+
+            JOptionPane.showMessageDialog(null, sb.toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "No recipes found with the given criteria.");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -667,21 +715,19 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
 
-    public void displayRecipes() {
-        List<String> recipes = getRecipes();
-        DefaultListModel<String> model = new DefaultListModel<>();
-        for (String recipe : recipes) {
-            model.addElement(recipe);
-        }
-        jList1.setModel(model);
-    }
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+
     
     public static void main(String[] args) {
         // Create an instance of CSC545MainProjectUI
         CSC545MainProjectUI ui = new CSC545MainProjectUI();
-
-        // Call displayRecipes() on the instance
-        ui.displayRecipes();
 
         /* Make sure that the JFrame is visible */
         java.awt.EventQueue.invokeLater(new Runnable() {
