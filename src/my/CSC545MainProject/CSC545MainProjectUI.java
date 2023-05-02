@@ -166,10 +166,9 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
                                 .addComponent(jLabel24)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jTextField6)
-                                .addGap(53, 53, 53))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jTextField8)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField6)
+                                    .addComponent(jTextField8))
                                 .addGap(53, 53, 53)))
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
@@ -197,9 +196,9 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22)
-                    .addComponent(jLabel25))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel25)
+                    .addComponent(jLabel22))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -222,16 +221,13 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
         jLabel7.setText("Name:");
 
         jTextArea2.setColumns(20);
+        jTextArea2.setLineWrap(true);
         jTextArea2.setRows(5);
         jScrollPane3.setViewportView(jTextArea2);
 
         jLabel8.setText("Cooking Instructions:");
 
-        jTextField2.setText("jTextField2");
-
         jLabel9.setText("Ingredients:");
-
-        jTextField3.setText("jTextField2");
 
         jLabel10.setText("Category:");
 
@@ -486,7 +482,6 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
 
         jLabel5.setText("Search Based On Ingredients:");
 
-        jTextField1.setText("jTextField1");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -562,6 +557,7 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jList1);
 
         jTextArea1.setColumns(20);
+        jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
@@ -703,16 +699,20 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         RecipeSearch recipeSearch = new RecipeSearch();
-
         // Get the selected category and entered ingredients
         String category = ((String) jComboBox1.getSelectedItem()).toLowerCase();
-        String ingredientsInput = jTextField1.getText().toLowerCase();
+        String ingredientsInput = jTextField1.getText().toLowerCase().trim();
 
-        // Split the input string and directly store it in an array
-        String[] ingredientsArray = ingredientsInput.split(",");
+        List<String> ingredients = new ArrayList<>();
+
+        if (!ingredientsInput.isEmpty()) {
+            // Split the input string and directly store it in an array
+            String[] ingredientsArray = ingredientsInput.split(",");
+            ingredients = Arrays.asList(ingredientsArray);
+        }
 
         // Search recipes by category and ingredients
-        List<String> recipes = recipeSearch.searchRecipes(category, Arrays.asList(ingredientsArray));
+        List<String> recipes = recipeSearch.searchRecipes(category, ingredients);
 
         // If any recipes were found, display them in a pop-up dialog
         if (!recipes.isEmpty()) {
@@ -821,6 +821,7 @@ public class CSC545MainProjectUI extends javax.swing.JFrame {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "An error occurred while connecting to the database.");
         }
+        getRecipes();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

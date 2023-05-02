@@ -24,24 +24,27 @@ public class RecipeSearch {
     public List<String> searchRecipes(String category, List<String> ingredients) {
         List<String> recipes = new ArrayList<>();
 
-        String query = "SELECT DISTINCT r.name FROM recipe r " +
-                "JOIN recipe_ingredients ri ON r.recipe_ID = ri.recipe_ID " +
-                "JOIN food f ON f.food_ID = ri.food_ID WHERE 1=1 ";
+        String baseQuery = "SELECT DISTINCT r.name FROM recipe r ";
+        String whereClause = "WHERE 1=1 ";
 
         if (!category.equalsIgnoreCase("All")) {
-            query += "AND LOWER(r.category) = ? ";
+            whereClause += "AND LOWER(r.category) = ? ";
         }
-
         if (!ingredients.isEmpty()) {
-            query += "AND LOWER(f.name) IN (";
+            // Only join with recipe_ingredients and food if ingredients are provided
+            baseQuery += "JOIN recipe_ingredients ri ON r.recipe_ID = ri.recipe_ID " +
+                         "JOIN food f ON f.food_ID = ri.food_ID ";
+            whereClause += "AND LOWER(f.name) IN (";
             for (int i = 0; i < ingredients.size(); i++) {
-                query += "?";
+                whereClause += "?";
                 if (i != ingredients.size() - 1) {
-                    query += ",";
+                    whereClause += ",";
                 }
             }
-            query += ") ";
+            whereClause += ") ";
         }
+
+        String query = baseQuery + whereClause;
 
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             int paramIndex = 1;
@@ -50,23 +53,22 @@ public class RecipeSearch {
                 stmt.setString(paramIndex++, category.toLowerCase());
             }
 
-            for (String ingredient : ingredients) {
-                stmt.setString(paramIndex++, ingredient.trim().toLowerCase());
+            if (!ingredients.isEmpty()) {
+                for (String ingredient : ingredients) {
+                    stmt.setString(paramIndex++, ingredient.trim().toLowerCase());
+                }
             }
-
+            System.out.println(query);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     recipes.add(rs.getString("name"));
                 }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
+        } catch (SQLException e) {
+                e.printStackTrace();
+            }
         return recipes;
     }
-
-
-
 
 }
